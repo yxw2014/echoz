@@ -2,14 +2,14 @@
 
 int handle_echo(int sockfd) {
     char buf[BUFSIZE];
-    int read_len = read(sockfd, buf, BUFSIZE);
+    int nread = read(sockfd, buf, BUFSIZE);
 
-    if ( read_len == -1 ) {
+    if ( nread == -1 ) {
         log_error("read error");
     }
     else {
-        int write_len = write(sockfd, buf, read_len);
-        if ( write_len == -1 ) {
+        int nwrite = write(sockfd, buf, nread);
+        if ( nwrite == -1 ) {
             log_error("write error");
         }
     }
