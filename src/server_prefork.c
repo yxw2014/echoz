@@ -7,6 +7,10 @@ int main(int argc, char** argv) {
     int port = 6666;
 
     int sockfd = tcp_server(bind_addr, port);
+    if ( sockfd == -1 ) {
+        log_error("bind error");
+        return 1;
+    }
     printf("bind to %s:%d\n", bind_addr, port);
 
     int i;
