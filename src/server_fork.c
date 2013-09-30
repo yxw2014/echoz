@@ -11,13 +11,23 @@ int main(int argc, char** argv) {
 
     while ( 1 ) {
         int cfd = accept(sockfd, NULL, NULL);
-        printf("accept\n");
         if ( cfd == -1 ) {
             log_error("accept error");
         }
-        else {
+        printf("accept\n");
+
+        int pid = fork();
+        if ( pid == -1 ) {
+            log_error("fork failed");
+            close(cfd);
+        }
+        else if ( pid == 0 ) {
+            // child
             handle_echo(cfd);
             close(cfd);
+        }
+        else {
+            // parent
         }
     }
 }
