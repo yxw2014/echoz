@@ -7,6 +7,9 @@ int handle_echo(int sockfd) {
     if ( nread == -1 ) {
         log_error("read error");
     }
+    else if ( nread == 0 ) {
+        log_error("connection closed");
+    }
     else {
         usleep(0.1 * 1000 * 1000);
         int nwrite = write(sockfd, buf, nread);
